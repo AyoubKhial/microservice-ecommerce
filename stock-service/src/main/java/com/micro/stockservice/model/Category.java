@@ -9,7 +9,7 @@ import java.util.Set;
 public class Category {
     private int id;
     private String name;
-    private Category categoryId;
+    private Category category;
     private Set<Product> products = new HashSet<>();
 
     @Id
@@ -35,12 +35,12 @@ public class Category {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    public Category getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @ManyToMany(fetch = FetchType.LAZY,
@@ -64,12 +64,12 @@ public class Category {
         Category category = (Category) o;
         return id == category.id &&
                 Objects.equals(name, category.name) &&
-                Objects.equals(categoryId, category.categoryId) &&
+                Objects.equals(category, category.category) &&
                 Objects.equals(products, category.products);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, categoryId, products);
+        return Objects.hash(id, name, category, products);
     }
 }

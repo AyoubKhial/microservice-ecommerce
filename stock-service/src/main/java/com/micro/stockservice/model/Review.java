@@ -12,7 +12,7 @@ public class Review {
     private int rating;
     private Timestamp insertedAt;
     private Timestamp updatedAt;
-    private Product productId;
+    private Product product;
     private int userId;
 
     @Id
@@ -78,12 +78,12 @@ public class Review {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    public Product getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Product productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Basic
@@ -108,11 +108,11 @@ public class Review {
                 Objects.equals(description, review.description) &&
                 Objects.equals(insertedAt, review.insertedAt) &&
                 Objects.equals(updatedAt, review.updatedAt) &&
-                Objects.equals(productId, review.productId);
+                Objects.equals(product, review.product);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, rating, insertedAt, updatedAt, productId, userId);
+        return Objects.hash(id, title, description, rating, insertedAt, updatedAt, product, userId);
     }
 }

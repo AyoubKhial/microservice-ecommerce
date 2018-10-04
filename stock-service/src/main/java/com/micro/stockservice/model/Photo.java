@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Photo {
     private int id;
     private String path;
-    private Product productId;
+    private Product product;
 
     @Id
     @Column(name = "id")
@@ -32,12 +32,12 @@ public class Photo {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id", nullable = false)
-    public Product getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Product productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
@@ -47,11 +47,11 @@ public class Photo {
         Photo photo = (Photo) o;
         return id == photo.id &&
                 Objects.equals(path, photo.path) &&
-                Objects.equals(productId, photo.productId);
+                Objects.equals(product, photo.product);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, path, productId);
+        return Objects.hash(id, path, product);
     }
 }

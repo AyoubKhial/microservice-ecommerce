@@ -1,6 +1,5 @@
 package com.micro.stockservice.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.util.*;
@@ -13,7 +12,7 @@ public class Product {
     private double price;
     private int quantity;
     private Double rating;
-    private Provider providerId;
+    private Provider provider;
     private String description;
     private Set<Category> categories = new HashSet<>();
     private List<Photo> photos = new ArrayList<>();
@@ -81,12 +80,12 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "provider_id", nullable = false)
-    public Provider getProviderId() {
-        return providerId;
+    public Provider getProvider() {
+        return provider;
     }
 
-    public void setProviderId(Provider providerId) {
-        this.providerId = providerId;
+    public void setProvider(Provider provider) {
+        this.provider = provider;
     }
 
     @Basic
@@ -115,7 +114,7 @@ public class Product {
         this.categories = categories;
     }
 
-    @OneToMany(mappedBy = "productId", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", orphanRemoval = true, cascade = CascadeType.ALL)
     public List<Photo> getPhotos() {
         return photos;
     }
@@ -135,7 +134,7 @@ public class Product {
                 Objects.equals(name, product.name) &&
                 Objects.equals(photo, product.photo) &&
                 Objects.equals(rating, product.rating) &&
-                Objects.equals(providerId, product.providerId) &&
+                Objects.equals(provider, product.provider) &&
                 Objects.equals(description, product.description) &&
                 Objects.equals(categories, product.categories) &&
                 Objects.equals(photos, product.photos);
@@ -143,6 +142,6 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, photo, price, quantity, rating, providerId, description, categories, photos);
+        return Objects.hash(id, name, photo, price, quantity, rating, provider, description, categories, photos);
     }
 }
