@@ -1,9 +1,9 @@
 package com.micro.stockservice.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Product {
@@ -16,6 +16,7 @@ public class Product {
     private Provider providerId;
     private String description;
     private Set<Category> categories = new HashSet<>();
+    private List<Photo> photos = new ArrayList<>();
 
     @Id
     @Column(name = "id")
@@ -114,6 +115,15 @@ public class Product {
         this.categories = categories;
     }
 
+    @OneToMany(mappedBy = "productId", orphanRemoval = true, cascade = CascadeType.ALL)
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -127,11 +137,12 @@ public class Product {
                 Objects.equals(rating, product.rating) &&
                 Objects.equals(providerId, product.providerId) &&
                 Objects.equals(description, product.description) &&
-                Objects.equals(categories, product.categories);
+                Objects.equals(categories, product.categories) &&
+                Objects.equals(photos, product.photos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, photo, price, quantity, rating, providerId, description, categories);
+        return Objects.hash(id, name, photo, price, quantity, rating, providerId, description, categories, photos);
     }
 }
