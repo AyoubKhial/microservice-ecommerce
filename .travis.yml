@@ -1,0 +1,37 @@
+matrix:
+  include:
+    - language: java
+      jdk: oraclejdk8
+      before_script:
+        - cd stock-service
+      script:
+        - ./mvn clean test
+	    services:
+		    - docker
+
+    - language: node_js
+      node_js: 
+        - "stable"
+      cache:
+        directories:
+          - "users-service/node_modules"
+      before_script:
+        - cd users-service
+      script:
+        - npm test
+      services:
+		    - docker
+    
+    - language: go
+      go:
+        - "1.x"
+      script:
+        - go test -v
+      services:
+		    - docker
+
+
+notifications:
+  email:
+    - Ayouub.Khial@gmail.com
+    - ChaouchSalah0@gmail.com
