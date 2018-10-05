@@ -11,7 +11,6 @@ import static com.micro.stockservice.util.ApplicationConstants.MAX_PAGE_SIZE;
  * This class check the validation of the parameters given in each request.
  * @author Ayoub Khial
  * @version 1.0
- * @since 1.0
  */
 
 public interface ValidatingRequestParameters {

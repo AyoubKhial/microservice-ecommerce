@@ -1,5 +1,7 @@
 package com.micro.stockservice.util;
 
+import java.util.Objects;
+
 public class RestResponse<T> {
 	private String status;
 	private int code;
@@ -53,4 +55,20 @@ public class RestResponse<T> {
 		this.setCode(pair.getKey());
 		this.setStatus(pair.getValue());
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RestResponse<?> that = (RestResponse<?>) o;
+        return code == that.code &&
+                Objects.equals(status, that.status) &&
+                Objects.equals(message, that.message) &&
+                Objects.equals(result, that.result);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(status, code, message, result);
+    }
 }
