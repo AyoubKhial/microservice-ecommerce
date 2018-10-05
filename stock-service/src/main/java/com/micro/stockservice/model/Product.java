@@ -1,6 +1,5 @@
 package com.micro.stockservice.model;
 
-
 import javax.persistence.*;
 import java.util.*;
 
@@ -14,7 +13,7 @@ public class Product {
     private Double rating;
     private Provider provider;
     private String description;
-    private Set<Category> categories = new HashSet<>();
+    private List<Category> categories = new ArrayList<>();
     private List<Photo> photos = new ArrayList<>();
 
     @Id
@@ -98,19 +97,15 @@ public class Product {
         this.description = description;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "product_category",
             joinColumns = { @JoinColumn(name = "product_id") },
             inverseJoinColumns = { @JoinColumn(name = "category_id") })
-    public Set<Category> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(Set<Category> categories) {
+    public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 

@@ -1,5 +1,7 @@
 package com.micro.stockservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -32,6 +34,7 @@ public class Photo {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id", nullable = false)
+    @JsonIgnore
     public Product getProduct() {
         return product;
     }
